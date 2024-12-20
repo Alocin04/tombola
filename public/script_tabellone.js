@@ -14,8 +14,20 @@ $(document).ready(function() {
     startUpdate();
     $('#tavola').html(table);
     $('#btnCall').click(function() {
-        $.getJSON('/endpoint/board_extract/?room_name=' + board_options.room_slug, function(res) {
+        $.getJSON('/endpoint/board_extract/?room_name=' + board_options.room_slug, async function(res) {
             if (res.status === 'OK') {
+                // printNumModal(res.data.board.last_called.toString(), "#modal", "modal-number");
+                printNumModal(res.data.board.last_called.toString(), "#modal-content", "modal-number");
+                $("#board").css("display", "none");
+                // $("#modal").css("display", "flex");
+                $("#modal").css("opacity", 1);
+                await sleep(2500);
+                // $("#modal").css("display", "none");
+                $("#modal").css("opacity", 0);
+                await sleep(500);
+                $("#board").css("display", "block");
+                // removeAllChild("modal")
+                removeAllChild("modal-content")
                 printNum(res.data.board.last_called.toString(), '#last-called-holder', 'big-number');
                 $('#number-' + res.data.board.last_called).addClass('called');
                 last_called = res.data.board.last_called;
@@ -107,6 +119,12 @@ function printNum(num, container_sel, items_sel) {
         $(container_sel + '> div').last().remove();
 }
 
+// Aggiunge un numero al contenitore degli ultimi numeri chiamati
+function printNumModal(num, container_sel, items_sel) {
+    var elem = '<p class="' + items_sel + ' n' + num + '">' + num + '</p>';
+    $(container_sel).prepend(elem);
+}
+
 // Swap dei pannelli a schermo
 function switchPanel(from, to) {
     if (($(from).css('display') == 'none')) {
@@ -135,3 +153,14 @@ function showPanel(panel_id, timeout = false) {
     });
     if (timeout !== false) setTimeout(function() { $(panel_id).fadeOut(200) }, timeout);
 }
+
+function removeAllChild(container_sel) {
+    const myNode = document.getElementById(container_sel);
+    myNode.textContent = ''; 
+    // myNode.innerHTML = '' 
+    // while (myNode.firstChild) {
+    //     myNode.removeChild(myNode.lastChild);
+    // }
+}
+
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
