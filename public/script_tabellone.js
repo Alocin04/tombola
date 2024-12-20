@@ -16,7 +16,6 @@ $(document).ready(function() {
     $('#btnCall').click(function() {
         $.getJSON('/endpoint/board_extract/?room_name=' + board_options.room_slug, async function(res) {
             if (res.status === 'OK') {
-                // printNumModal(res.data.board.last_called.toString(), "#modal", "modal-number");
                 printNumModal(res.data.board.last_called.toString(), "#modal-content", "modal-number");
                 $("#board").css("display", "none");
                 // $("#modal").css("display", "flex");
@@ -26,10 +25,10 @@ $(document).ready(function() {
                 $("#modal").css("opacity", 0);
                 await sleep(500);
                 $("#board").css("display", "block");
-                // removeAllChild("modal")
                 removeAllChild("modal-content")
-                printNum(res.data.board.last_called.toString(), '#last-called-holder', 'big-number');
-                $('#number-' + res.data.board.last_called).addClass('called');
+                // printNum(res.data.board.last_called.toString(), '#last-called-holder', 'big-number'); // Col modale lo mette get room, non so il perché
+                // await sleep(2000)
+                // $('#number-' + res.data.board.last_called).addClass('called'); // Col modale lo mette get room, non so il perché
                 last_called = res.data.board.last_called;
             } else {
                 console.log(res.message);
