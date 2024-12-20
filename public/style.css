@@ -26,6 +26,7 @@ h1.title {
     text-shadow: 1px 2px #C63B3D;
     color: #D1574A; 
     font-size: 80px;
+    text-align: center;
 }
 .title-2 {
     font-size: 1.6em;
@@ -180,6 +181,7 @@ h1.title {
     min-height: 500px;
     border-radius: 10px;
     padding: 16px;
+    margin-top: 15px;
 }
 .panel.last-called {
     height: 610px;
@@ -311,7 +313,11 @@ h1.title {
 
 .mb-1 { margin-bottom: 0.5em; }
 .mb-2 { margin-bottom: 1.0em; }
-.mb-3 { margin-bottom: 1.5em; }
+.mb-3 { 
+    margin: 1.5em; 
+    text-align: center;
+    width: 100%;
+}
 .mb-4 { margin-bottom: 2.0em; }
 .mt-1 { margin-top: 0.5em; }
 .mt-2 { margin-top: 1.0em; }
@@ -319,6 +325,7 @@ h1.title {
 .mt-4 { margin-top: 2.0em; }
 
 #tavola {
+    /* padding-top: 20px; */
     width: 100%;
 }
 #tavola tr:nth-child(3n) td {
